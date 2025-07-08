@@ -33,26 +33,27 @@ A sleek, responsive, and minimal E-Market application built using **Flask**, **B
 E-Market/
 │
 ├── Components/
-│   ├── **init**.py          # App and DB setup
-│   ├── Models.py            # SQLAlchemy models
-│   ├── Routes.py            # Flask routes
-│   └── Forms.py             # WTForms for login, register, purchase, sell
+│ ├── init.py # App and DB setup
+│ ├── Models.py # SQLAlchemy models
+│ ├── Routes.py # Flask routes
+│ └── Forms.py # WTForms for login, register, purchase, sell
 │
 ├── Templates/
-│   ├── base.html            # Main layout
-│   ├── home.html            # Landing page
-│   ├── market.html          # Market dashboard
-│   ├── Includes/
-│   │   ├── items\_modals.html
-│   │   └── owned\_items\_modal.html
+│ ├── base.html # Main layout
+│ ├── home.html # Landing page
+│ ├── market.html # Market dashboard
+│ ├── Includes/
+│ │ ├── items_modals.html
+│ │ └── owned_items_modal.html
 │
 ├── static/
-│   └── styles.css           # Custom styles
+│ └── styles.css # Custom styles
 │
-├── run.py                   # App entry point
-└── README.md                # You’re reading it!
+├── run.py # App entry point
+└── README.md # You’re reading it!
 
 ````
+`
 
 ---
 
