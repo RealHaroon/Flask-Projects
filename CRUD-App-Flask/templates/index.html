@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee CRUD App</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-3">Employee Management</h1>
+        <h5 class="text-center text-muted mb-4">CRUD APP by Haroon</h5>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for msg in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Add/Edit Form -->
+        <div class="card mb-4">
+            <div class="card-body">
+                {% if edit_emp %}
+                    <h4 class="card-title">Update Employee</h4>
+                    <form method="POST" action="/edit/{{ edit_emp.id }}">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" value="{{ edit_emp.name }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" name="email" value="{{ edit_emp.email }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="department" value="{{ edit_emp.department }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="/" class="btn btn-secondary">Cancel</a>
+                    </form>
+                {% else %}
+                    <h4 class="card-title">Add New Employee</h4>
+                    <form method="POST" action="/">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" placeholder="Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="department" placeholder="Department" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Employee</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Employee List -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">All Employees</h4>
+                {% if employees %}
+                    <ul class="list-group">
+                        {% for emp in employees %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>ID:</strong> {{ emp.id }} |
+                                    <strong>Name:</strong> {{ emp.name }} |
+                                    <strong>Email:</strong> {{ emp.email }} |
+                                    <strong>Dept:</strong> {{ emp.department }}
+                                </div>
+                                <div>
+                                    <a href="/edit/{{ emp.id }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="/delete/{{ emp.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">No employees found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS for alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
