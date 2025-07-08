@@ -121,4 +121,3 @@ This project is open-source and free to use for educational purposes.
 
 ---
 
-Would you like me to create a `requirements.txt` file and push everything to GitHub too?
