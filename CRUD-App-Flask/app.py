@@ -24,20 +24,23 @@ def home():
         #Basic backend Validations
         if not name or not email or not department:
             flash("All field are required.")
+            return redirect(url_for('home'))
         if '@' not in email or '.' not in email:
             flash("Invalid Email Adress")
+            return redirect(url_for('home'))
         existing = Employee.query.filter_by(email=email).first()
         if existing:
-            flash("Email already Exists")
+            flash("Email already Exists",category='danger')
+            return redirect(url_for('home'))
         
 
 
         new_employee= Employee(name=name,email=email,department=department)
         db.session.add(new_employee)
         db.session.commit()
-        flash("Employee added successfully!")
+        flash("Employee added successfully!",category='success')
         return redirect(url_for('home'))
-
+    # for GET request
     employees = Employee.query.all()
     return render_template('index.html',employees=employees)
 
@@ -47,7 +50,7 @@ def delete(id):
     emp=Employee.query.get_or_404(id)
     db.session.delete(emp)
     db.session.commit()
-    flash("Employee deleted successfully!")
+    flash("Employee deleted successfully!",category='success')
     return redirect(url_for('home'))
 
 
@@ -60,7 +63,7 @@ def edit(id):
         emp.email=request.form['email']
         emp.department=request.form['department']
         db.session.commit()
-        flash("Employee updated successfully!")
+        flash("Employee updated successfully!",category='success')
         return redirect(url_for('home'))
     employees=Employee.query.all()
     return render_template('index.html',employees=employees,edit_emp=emp)
