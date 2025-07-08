@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}Market Page{% endblock %}
+
+{% block content %}
+<style>
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    transform: scale(1.02);
+  }
+
+  .btn-custom {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .btn-info-custom {
+    background-color: #0dcaf0;
+    color: white;
+  }
+
+  .btn-info-custom:hover {
+    background-color: #0aa4c2;
+  }
+
+  .btn-success-custom {
+    background-color: #198754;
+    color: white;
+  }
+
+  .btn-success-custom:hover {
+    background-color: #146c43;
+  }
+
+  .item-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #28a745;
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Available Items -->
+    <div class="col-lg-8 mb-4">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">🛒 Available Items</h2>
+        {% if name %}
+        <p class="text-muted">Search results for: <strong>{{ name }}</strong></p>
+        {% endif %}
+      </div>
+
+      {% if items %}
+      <div class="item-grid">
+        {% for item in items %}
+        {% include 'Includes/items_modals.html' %}
+        <div class="glass-card p-3 text-black">
+          <h5 class="fw-bold">{{ item.name }}</h5>
+          <p class="mb-1"><strong>Model:</strong> {{ item.model }}</p>
+          <p class="item-price">${{ item.price }}</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-info-custom btn-custom" data-bs-toggle="modal" data-bs-target="#Modal-MoreInfo-{{ item.id }}">More Info</button>
+            <button class="btn btn-success-custom btn-custom" data-bs-toggle="modal" data-bs-target="#Modal-PurchaseConfirm-{{ item.id }}">Buy</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="alert alert-warning text-center mt-3">
+        No items available at the moment. Please check back later!
+      </div>
+      {% endif %}
+    </div>
+
+
+    <!-- Owned Items -->
+    <div class="col-lg-4">
+      <h2 class="fw-bold text-warning text-center">🎒 Owned Items</h2>
+      <p class="text-muted text-center">Click on "Sell this item " to return an item to the market.</p>
+      <br>
+
+      {% if owned_items %}
+      {% for owned_item in owned_items %}
+      {% include 'Includes/owned_items_modal.html' %}
+      <div class="glass-card bg-dark text-white p-3 mb-3 text-center">
+        <h5 class="fw-bold">{{ owned_item.name }}</h5>
+        <p><strong>Price:</strong> <span class="text-success">${{ owned_item.price }}</span></p>
+        <button class="btn btn-danger btn-custom" data-bs-toggle="modal" data-bs-target="#Modal-SellingConfirm-{{ owned_item.id }}">
+          Sell this Item
+        </button>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="alert alert-secondary text-center">
+        You don't own any items yet.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+<!-- Old Table  -->
+
+<!-- 
+<h2 class="text-center mb-4">Available Items</h2>
+
+<p class="text-muted">Search Results for: <strong>{{ itemName }}</strong></p>
+
+<table class="table table-dark table-hover table-striped">
+    <thead class="table-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Model</th>
+            <th scope="col">Price</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.model }}</td>
+            <td>${{ item.price }}</td>
+            <td>
+                <button class="btn btn-info btn-sm me-2">More Info</button>
+                <button class="btn btn-success btn-sm">Buy Item</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> -->

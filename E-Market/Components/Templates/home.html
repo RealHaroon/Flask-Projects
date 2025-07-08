@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content%}
+<div class="container mt-5 text-center">
+    <div class="card shadow-lg p-4 bg-light rounded">
+        <h1 class="display-4 text-primary fw-bold">Welcome to Your Dashboard</h1>
+        <p class="lead text-secondary">Explore, Learn, and Build Something Awesome!</p>
+        <hr class="my-4">
+        <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg mt-3">Get Started</a>
+    </div>
+</div>
+
+{% endblock %}

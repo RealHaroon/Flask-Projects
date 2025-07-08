@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{% block title%} Register Page{% endblock %}
+
+{% block content %}
+<style>
+   body {
+        background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+    }
+    .container {
+        background-color: rgba(72, 72, 144, 0.7); 
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin-top: 50px;
+    }
+</style>
+<body class="text-center">
+    
+    <div class="container">
+        <form  method="POST" class="form-register" style="color: rgb(255, 255, 255);">
+            {{ form.hidden_tag()}}
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please Create Your Account
+            </h1>
+        {{ form.username.label()}}
+        {{ form.username(class="form-control",placeholder="User Name")}}
+        {{ form.email_address.label()}}
+        {{ form.email_address(class="form-control",placeholder="Email Address")}}
+        {{ form.password1.label()}}
+        {{ form.password1(class="form-control",placeholder="Password")}}
+        {{ form.password2.label()}}
+        {{ form.password2(class="form-control",placeholder="Confirm Password")}}
+        <br>
+        {{ form.submit(class="btn btn-lg btn-block btn-primary")}}
+            <br>
+         <div class="checkbox mb-3">
+                <br>
+               <h6>Already  have an account?</h6>
+               <a class="btn btn-sm btn-secondary" href="{{ url_for('login') }}">Login</a>
+            </div>
+      
+        </form> 
+    </div>
+</body>
+
+
+{% endblock %}
