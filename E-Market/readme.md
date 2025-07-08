@@ -27,9 +27,6 @@ A sleek, responsive, and minimal E-Market application built using **Flask**, **B
 ---
 
 ## 📁 Project Structure
-
-```
-
 E-Market/
 │
 ├── Components/
@@ -51,6 +48,10 @@ E-Market/
 │
 ├── run.py # App entry point
 └── README.md # You’re reading it!
+
+```
+
+
 
 ````
 `
