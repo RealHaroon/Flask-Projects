@@ -89,13 +89,9 @@ CRUD-App-Flask/
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshot
 
-| Add Employee | Edit Employee | Flash Messages |
-| ------------ | ------------- | -------------- |
-| (Add image)  | (Add image)   | (Add image)    |
-
-> You can use \[Snipping Tool] or \[Lightshot] to take screenshots of your UI and paste them here!
+![To-Do App Screenshot](static/screenshot.png)
 
 ---
 
