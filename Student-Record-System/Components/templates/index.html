@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Record System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Student Record System</h2>
+
+  <!-- Add Student Form -->
+  <form method="POST" class="row g-3 mb-4">
+    <div class="col-md-3"><input type="text" name="roll_no" class="form-control" placeholder="Roll No" required></div>
+    <div class="col-md-3"><input type="text" name="name" class="form-control" placeholder="Name" required></div>
+    <div class="col-md-3"><input type="text" name="department" class="form-control" placeholder="Department"></div>
+    <div class="col-md-3"><input type="email" name="email" class="form-control" placeholder="Email"></div>
+    <div class="col-md-12"><button type="submit" class="btn btn-primary w-100">Add Student</button></div>
+  </form>
+
+  <!-- Student Table -->
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th><th>Roll No</th><th>Name</th><th>Department</th><th>Email</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+      <!-- Student Row -->
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.roll_no }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.department }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+          <form action="/update/{{ student.id }}" method="POST" style="display:inline-block;">
+            <input type="text" name="roll_no" value="{{ student.roll_no }}" required>
+            <input type="text" name="name" value="{{ student.name }}" required>
+            <input type="text" name="department" value="{{ student.department }}">
+            <input type="email" name="email" value="{{ student.email }}">
+            <button class="btn btn-sm btn-success">Update</button>
+          </form>
+          <br>
+          <a href="/delete/{{ student.id }}" class="btn btn-sm btn-danger">Delete</a>
+          <br>
+
+          <!-- More Info button -->
+          <button class="btn btn-sm btn-info" data-bs-toggle="collapse" data-bs-target="#grades{{ student.id }}">
+            More Info
+          </button>
+        </td>
+      </tr>
+
+      <!-- Grade Info Row (Collapsed) -->
+      <tr class="collapse" id="grades{{ student.id }}">
+        <td colspan="6">
+          <strong>Info</strong>
+          <ul>
+            <h4>Subject    Score</h4>
+            {% for grade in student.grades %}
+              <li>{{ grade.subject }} - {{ grade.score }}</li>
+            {% endfor %}
+          </ul>
+
+          <!-- Add Grade Form -->
+          <form action="/add_grade/{{ student.id }}" method="POST" class="row g-2 mt-2">
+            <div class="col"><input name="subject" class="form-control" placeholder="Subject" required></div>
+            <div class="col"><input name="score" class="form-control" type="number" placeholder="Score" step="0.1" required></div>
+            <div class="col"><button class="btn btn-primary">Add Grade</button></div>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
