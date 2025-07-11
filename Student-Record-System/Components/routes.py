@@ -63,3 +63,12 @@ def add_grade(student_id):
     db.session.commit()
     flash("Grade added successfully!", category='success')
     return redirect(url_for('index'))
+
+@app.route('/edit_grade/<int:grade_id>',methods=['POST'])
+def edit_grade(grade_id):
+    grade=Grade.query.get_or_404(grade_id)
+    grade.subject=request.form['subject']
+    grade.score=request.form['score']
+    db.session.commit()
+    flash("Grade updated successfully!", category='success')
+    return redirect(url_for('index'))

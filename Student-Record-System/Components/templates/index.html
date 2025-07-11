@@ -4,12 +4,21 @@
   <title>Student Record System</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background-color: #f5f9ff; }
-  </style>
+        body {
+            background-color: #eef3e7; 
+        }
+        .card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-space {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
   <h2 class="text-center mb-4 text-primary fw-bold">🎓 Student Record System</h2>
+  <h5 class="text-center mb-4 text-primary fw-bold">Created By Haroon</h5>
 
   <!-- Flash messages -->
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -77,10 +86,29 @@
             <td colspan="6">
               <strong>Grades:</strong>
               <ul>
-                {% for g in student.grades %}
-                  <li>{{ g.subject }} - {{ g.score }}</li>
-                {% endfor %}
-              </ul>
+                 {% for g in student.grades %}
+        <li>
+          {{ g.subject }} - {{ g.score }}
+          <button class="btn btn-sm btn-outline-secondary btn-sm py-0 px-2 ms-2" data-bs-toggle="collapse" data-bs-target="#editGrade{{ g.id }}">Edit</button>
+
+          <!-- Edit Grade Form (collapsible) -->
+          <div class="collapse mt-2" id="editGrade{{ g.id }}">
+            <form action="/edit_grade/{{ g.id }}" method="POST" class="row g-2 mt-1">
+              <div class="col">
+                <input name="subject" value="{{ g.subject }}" class="form-control form-control-sm" required>
+              </div>
+              <div class="col">
+                <input name="score" value="{{ g.score }}" type="number" step="0.1" class="form-control form-control-sm" required>
+              </div>
+              <div class="col">
+                <button class="btn btn-sm btn-success">Update</button>
+              </div>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+
               <form action="/add_grade/{{ student.id }}" method="POST" class="row g-2">
                 <div class="col"><input name="subject" class="form-control" placeholder="Subject" required></div>
                 <div class="col"><input name="score" type="number" step="0.1" class="form-control" placeholder="Score" required></div>
