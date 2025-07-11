@@ -18,6 +18,17 @@ A simple and user-friendly Student Record Management System built with **Flask**
 - ✅ Edit forms with cancel option
 - ✅ Grade editing with collapsible inline forms
 
+
+
+## 🛠️ Tech Stack
+
+- **Backend**: Flask, SQLAlchemy
+- **Frontend**: HTML, Bootstrap 5
+- **Database**: SQLite (or switchable to MySQL/PostgreSQL)
+
+---
+
+
 ---
 
 ## 📸 Screenshots
@@ -29,15 +40,6 @@ A simple and user-friendly Student Record Management System built with **Flask**
 ![Edit Grade](static/screenshot2.png.png)
 
 ---
-
-## 🛠️ Tech Stack
-
-- **Backend**: Flask, SQLAlchemy
-- **Frontend**: HTML, Bootstrap 5
-- **Database**: SQLite (or switchable to MySQL/PostgreSQL)
-
----
-
 ## 🚀 How to Run
 
 ### 1. Clone the Repository
