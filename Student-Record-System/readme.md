@@ -27,6 +27,7 @@ A simple and user-friendly Student Record Management System built with **Flask**
 - **Database**: SQLite (or switchable to MySQL/PostgreSQL)
 
 ---
+````
 
 
 ---
@@ -34,10 +35,10 @@ A simple and user-friendly Student Record Management System built with **Flask**
 ## 📸 Screenshots
 
 ### 🧑‍🎓 Student List & Add Form
-![Student List](static/screenshot1.png.png)
+![Student List](static/screenshot1.png)
 
 ### ✏️ Edit Student / Grade
-![Edit Grade](static/screenshot2.png.png)
+![Edit Grade](static/screenshot2.png)
 
 ---
 ## 🚀 How to Run
@@ -46,7 +47,7 @@ A simple and user-friendly Student Record Management System built with **Flask**
 ```bash
 git clone https://github.com/your-username/student-record-system.git
 cd student-record-system
-````
+```
 
 ### 2. Create & Activate Virtual Environment
 
