@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes app</title>
+  <meta charset="UTF-8">
+  <title>Notes App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0fdf4;
+    }
+    .note-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .textarea-resize {
+      resize: vertical;
+    }
+  </style>
 </head>
 <body>
-    
+  <div class="container my-5">
+    <h1 class="text-center mb-4">📝 Notes App</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Add Note -->
+    {% if not edit_note %}
+    <div class="card p-4 mb-4 shadow-sm">
+      <h5 class="mb-3">Add New Note</h5>
+      <form method="POST" action="/">
+        <div class="mb-3">
+          <input type="text" class="form-control" name="title" placeholder="Title">
+        </div>
+        <div class="mb-3">
+          <textarea name="content" class="form-control textarea-resize" rows="4" placeholder="Your note..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Add Note</button>
+      </form>
+    </div>
+    {% endif %}
+
+    <!-- Notes List -->
+    <div class="row">
+      {% for note in notes %}
+      <div class="col-md-6 mb-4">
+        <div class="note-card">
+          {% if edit_note and edit_note.id == note.id %}
+          <!-- Edit Form -->
+          <form method="POST" action="{{ url_for('edit_note', id=note.id) }}">
+            <div class="mb-2">
+              <input type="text" class="form-control" name="title" value="{{ edit_note.title }}">
+            </div>
+            <div class="mb-2">
+              <textarea class="form-control textarea-resize" name="content" rows="4">{{ edit_note.content }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary btn-sm">Cancel</a>
+          </form>
+          {% else %}
+          <!-- Normal View -->
+          <h5>{{ note.title }}</h5>
+          <p class="text-muted small">🕒 Updated: {{ note.updated_at.strftime('%Y-%m-%d %H:%M') }}</p>
+          <p>{{ note.content }}</p>
+          <a href="{{ url_for('edit_note', id=note.id) }}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{{ url_for('delete_note', id=note.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete this note?')">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
