@@ -15,8 +15,6 @@ A simple yet powerful **Notes App** built with **Flask** and **SQLite**, where u
 
 ## 📸 Screenshot
 
-> *(Add your screenshot here)*
-> Example:
 > ![Notes App Screenshot](static/screenshot.png)
 
 ---
